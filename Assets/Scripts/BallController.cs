@@ -8,11 +8,11 @@ public class BallController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private Rigidbody ballRB;
+    private bool isBallLaunched;
 
     void Start()
     {
         ballRB = GetComponent<Rigidbody>(); 
-
         inputManager.OnSpacePressed.AddListener(LaunchBall);
     }
 
@@ -23,6 +23,9 @@ public class BallController : MonoBehaviour
     }
 
     private void LaunchBall(){
+        if (isBallLaunched) return;
+
+        isBallLaunched = true;
         ballRB.AddForce(transform.forward * force, ForceMode.Impulse);
     }
 }
